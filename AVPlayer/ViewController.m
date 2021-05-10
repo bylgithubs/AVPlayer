@@ -38,27 +38,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
-static char overlayKey;
+static char overViewKey;
 
-- (UIView *)overlay
+- (UIView *)overView
 {
-    return objc_getAssociatedObject(self, &overlayKey);
+    return objc_getAssociatedObject(self, &overViewKey);
 }
 
-- (void)setOverlay:(UIView *)overlay
+- (void)setOverView:(UIView *)overView
 {
-    objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &overViewKey, overView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)clearNavigationBackground:(UIColor *)backgroundColor {
-    if (!self.overlay) {
+    if (!self.overView) {
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), CGRectGetHeight(self.navigationController.navigationBar.bounds))];
-        self.overlay.userInteractionEnabled = NO;
-        [self.navigationController.navigationBar.subviews.firstObject insertSubview:self.overlay atIndex:0];
-        self.overlay.bounds = self.navigationController.navigationBar.subviews.firstObject.bounds;
+        self.overView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), CGRectGetHeight(self.navigationController.navigationBar.bounds))];
+        self.overView.userInteractionEnabled = NO;
+        [self.navigationController.navigationBar.subviews.firstObject insertSubview:self.overView atIndex:0];
+        self.overView.bounds = self.navigationController.navigationBar.subviews.firstObject.bounds;
     }
-    self.overlay.backgroundColor = backgroundColor;
+    self.overView.backgroundColor = backgroundColor;
 }
 
 - (void)observePlayProgress{
